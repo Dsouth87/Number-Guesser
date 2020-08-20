@@ -1,4 +1,4 @@
-let maxNum = 100,
+let maxNum = 10,
   minNum = 1,
   answer = getRandomNumber(minNum, maxNum),
   guessLeft = 5
@@ -9,12 +9,16 @@ const minNumUI = document.querySelector('.min-num')
 const guessUI = document.querySelector('#guess-input')
 const submitUI = document.querySelector('.guess-btn')
 const messageUI = document.querySelector('.message')
+const scoreboardUI = document.querySelector('.scoreboard')
+const scoreUI = document.querySelector('.score')
 
 submitUI.addEventListener('click', submitGuess)
 gameUI.addEventListener('mousedown', playAgain)
 
 minNumUI.textContent = minNum
 maxNumUI.textContent = maxNum
+
+checkLocalStorage()
 
 function submitGuess(e) {
   const guess = parseInt(guessUI.value)
@@ -60,10 +64,31 @@ function gameOver(win, msg) {
   setMessage(msg, color)
   submitUI.value = 'Play Again?'
   submitUI.className += ' play-again'
+  if (win) {
+    if (window.localStorage.getItem('score') === null) {
+      window.localStorage.setItem('score', (6 - guessLeft).toString())
+      scoreUI.textContent = 6 - guessLeft
+      scoreboardUI.style.display = 'flex'
+    } else if (
+      guessLeft >
+      5 - JSON.parse(window.localStorage.getItem('score'))
+    ) {
+      window.localStorage.setItem('score', JSON.stringify(6 - guessLeft))
+      scoreUI.textContent = 6 - guessLeft
+      scoreboardUI.style.display = 'flex'
+    }
+  }
 }
 
 function setMessage(message, color) {
   messageUI.textContent = message
   guessUI.style.borderColor = color
   messageUI.style.color = color
+}
+
+function checkLocalStorage() {
+  if (window.localStorage.getItem('score')) {
+    scoreUI.textContent = window.localStorage.getItem('score')
+    scoreboardUI.style.display = 'flex'
+  }
 }

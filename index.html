@@ -8,6 +8,25 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
     />
+    <style>
+      .scoreboard {
+        font-weight: 100;
+        display: none;
+      }
+
+      .scoreboard h5 {
+        padding: 0 0.5rem;
+      }
+
+      .scorecard {
+        margin-left: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .scorecard:hover {
+        cursor: default;
+      }
+    </style>
     <title>Number Guesser</title>
   </head>
   <body>
@@ -16,7 +35,7 @@
       <div id="game">
         <p>
           Guess a number between <span class="min-num">2</span> and
-          <span class="max-num">9</span>
+          <span class="max-num"></span>
         </p>
         <input
           type="number"
@@ -25,6 +44,11 @@
         />
         <input type="submit" value="Submit" class="guess-btn" />
         <p class="message"></p>
+      </div>
+      <hr />
+      <div class="row scoreboard">
+        <h5>Personal Best</h5>
+        <h5 class="button scorecard"><span class="score">5</span> Moves</h5>
       </div>
     </div>
     <script src="app.js"></script>
