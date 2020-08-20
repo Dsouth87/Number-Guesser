@@ -1,4 +1,4 @@
-let maxNum = 10,
+let maxNum = 100,
   minNum = 1,
   answer = getRandomNumber(minNum, maxNum),
   guessLeft = 5
